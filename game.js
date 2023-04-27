@@ -17,15 +17,23 @@
 
       function requestAnswer() {
         return function check() {
-          const answer = String(prompt('камень, ножницы, бумага?'));
+          const answer = prompt('камень, ножницы, бумага?');
+
+          if (answer === null) {
+            const statusA = alert('Вы точно хотите выйти из игры?');
+            if (!statusA) {
+              alert(`Компьютер: ${result.computer}; Вы: ${result.player}`);
+              window.location.reload();
+            }
+          }
+
           const lowerA = answer.toLowerCase();
-          console.log(lowerA);
 
           if (
             FIGURES_RUS.some((item) => item === lowerA) ||
             FIGURES_RUS.some((item) => item.slice(0, 3) === lowerA.slice(0, 3))
           ) {
-            const compare = (() => {
+            const compare = () => {
               if (
                 (lowerA[0] === 'к' && botAnswer[0] === 'к') ||
                 (lowerA[0] === 'н' && botAnswer[0] === 'н') ||
@@ -33,9 +41,7 @@
               ) {
                 alert(`вы: ${lowerA}; компьютер: ${botAnswer};
                 ничья`);
-                console.log(lowerA[0]);
-                console.log(botAnswer[0]);
-                check();
+                start();
               }
 
               if (
@@ -45,11 +51,7 @@
               ) {
                 alert(`вы: ${lowerA}; компьютер: ${botAnswer};
                 вы выйграли`);
-                console.log(lowerA[0]);
-                console.log(botAnswer[0]);
                 result.player += 1;
-                console.log(result.player);
-                console.log(result.computer);
                 start();
               }
 
@@ -60,21 +62,18 @@
               ) {
                 alert(`вы: ${lowerA}; компьютер: ${botAnswer};
                 компьютер выйграл`);
-                console.log(lowerA[0]);
-                console.log(botAnswer[0]);
                 result.computer += 1;
-                console.log(result.player);
-                console.log(result.computer);
                 start();
               }
-            })();
+            };
+            compare();
             return lowerA[0];
           } else {
             return check();
           }
         };
       }
-      const res = requestAnswer()();
+      requestAnswer()();
     };
   };
 
