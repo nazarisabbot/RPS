@@ -34,34 +34,24 @@
             FIGURES_RUS.some((item) => item.slice(0, 3) === lowerA.slice(0, 3))
           ) {
             const compare = () => {
-              if (
-                (lowerA[0] === 'к' && botAnswer[0] === 'к') ||
-                (lowerA[0] === 'н' && botAnswer[0] === 'н') ||
-                (lowerA[0] === 'б' && botAnswer[0] === 'б')
-              ) {
+              if (lowerA.slice(0, 3) === botAnswer.slice(0, 3)) {
                 alert(`вы: ${lowerA}; компьютер: ${botAnswer};
                 ничья`);
                 start();
               }
 
               if (
-                (lowerA[0] === 'к' && botAnswer[0] === 'н') ||
-                (lowerA[0] === 'н' && botAnswer[0] === 'б') ||
-                (lowerA[0] === 'б' && botAnswer[0] === 'к')
+                (lowerA === FIGURES_RUS[0] && botAnswer === FIGURES_RUS[1]) ||
+                (lowerA === FIGURES_RUS[1] && botAnswer === FIGURES_RUS[2]) ||
+                (lowerA === FIGURES_RUS[2] && botAnswer === FIGURES_RUS[0])
               ) {
                 alert(`вы: ${lowerA}; компьютер: ${botAnswer};
                 вы выйграли`);
                 result.player += 1;
                 start();
-              }
-
-              if (
-                (lowerA[0] === 'н' && botAnswer[0] === 'к') ||
-                (lowerA[0] === 'б' && botAnswer[0] === 'н') ||
-                (lowerA[0] === 'к' && botAnswer[0] === 'б')
-              ) {
+              } else {
                 alert(`вы: ${lowerA}; компьютер: ${botAnswer};
-                компьютер выйграл`);
+                вы проиграли`);
                 result.computer += 1;
                 start();
               }
